@@ -1,0 +1,1478 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/leaflet-measure.css">
+        <style>
+        #map {
+            width: 844px;
+            height: 739px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script><script src="js/L.Control.Locate.min.js"></script>
+        <script src="js/multi-style-layer.js"></script>
+        <script src="js/leaflet-svg-shape-markers.min.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet-measure.js"></script>
+        <script src="data/RencanaPolaRuang_1.js"></script>
+        <script src="data/LahanEksisting_2.js"></script>
+        <script src="data/RencanaJaringanJalanKawasanSepaku_3.js"></script>
+        <script src="data/JaringanJalanIbukotaNusantara_4.js"></script>
+        <script src="data/PersilBangunan_5.js"></script>
+        <script src="data/RencanaPembangunanSaranaPrasaranaLayananTransportasi_6.js"></script>
+        <script src="data/RencanaPembangunanSaranaPrasaranaUmum_7.js"></script>
+        <script src="data/RencanaHubTransport_8.js"></script>
+        <script src="data/DelineasiKawasanSepaku_9.js"></script>
+        <script src="data/DeliniasiIbukotaNusantara_10.js"></script>
+        <script src="data/BatasAdministrasiBagianWilayahPerencanaan_11.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-1.0020232957941593,116.68168698651967],[-0.8824204296391478,116.81743349758105]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        var measureControl = new L.Control.Measure({
+            position: 'topleft',
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .innerHTML = '';
+        document.getElementsByClassName('leaflet-control-measure-toggle')[0]
+        .className += ' fas fa-ruler';
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleImagery_0');
+        map.getPane('pane_GoogleImagery_0').style.zIndex = 400;
+        var layer_GoogleImagery_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleImagery_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 2,
+            maxNativeZoom: 23
+        });
+        layer_GoogleImagery_0;
+        map.addLayer(layer_GoogleImagery_0);
+        function pop_RencanaPolaRuang_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(feature.properties['NAMOBJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMZON</strong><br />' + (feature.properties['NAMZON'] !== null ? autolinker.link(feature.properties['NAMZON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KODZON</strong><br />' + (feature.properties['KODZON'] !== null ? autolinker.link(feature.properties['KODZON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMSZN</strong><br />' + (feature.properties['NAMSZN'] !== null ? autolinker.link(feature.properties['NAMSZN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KODSZN</strong><br />' + (feature.properties['KODSZN'] !== null ? autolinker.link(feature.properties['KODSZN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>JNSPR</strong><br />' + (feature.properties['JNSPR'] !== null ? autolinker.link(feature.properties['JNSPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>WP</strong><br />' + (feature.properties['WP'] !== null ? autolinker.link(feature.properties['WP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Luas</strong><br />' + (feature.properties['Luas'] !== null ? autolinker.link(feature.properties['Luas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Desa</strong><br />' + (feature.properties['Desa'] !== null ? autolinker.link(feature.properties['Desa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RencanaPolaRuang_1_0(feature) {
+            switch(String(feature.properties['NAMOBJ'])) {
+                case 'Badan Air':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(151,219,242,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Badan Jalan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,30,30,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Campuran Intensitas Tinggi':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,85,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kawasan Ekosistem Mangrove':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(45,150,110,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perdagangan dan Jasa Skala SWP':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,165,165,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pergudangan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,55,55,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perlindungan Setempat':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(5,215,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pertahanan dan Keamanan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,0,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perumahan Kepadatan Sangat Rendah':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,155,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perumahan Kepadatan Tinggi':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,220,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rimba Kota':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,85,10,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SPU Skala Kelurahan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(185,75,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SPU Skala Kota':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,25,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SPU Skala RW':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,100,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taman Kelurahan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,165,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taman Kota':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(65,105,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tanaman Pangan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,245,70,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perdagangan dan Jasa Skala WP':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,130,130,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkantoran':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,155,155,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkebunan':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(175,175,55,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Transportasi':
+                    return {
+                pane: 'pane_RencanaPolaRuang_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,55,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RencanaPolaRuang_1');
+        map.getPane('pane_RencanaPolaRuang_1').style.zIndex = 401;
+        map.getPane('pane_RencanaPolaRuang_1').style['mix-blend-mode'] = 'normal';
+        var layer_RencanaPolaRuang_1 = new L.geoJson(json_RencanaPolaRuang_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RencanaPolaRuang_1',
+            layerName: 'layer_RencanaPolaRuang_1',
+            pane: 'pane_RencanaPolaRuang_1',
+            onEachFeature: pop_RencanaPolaRuang_1,
+            style: style_RencanaPolaRuang_1_0,
+        });
+        bounds_group.addLayer(layer_RencanaPolaRuang_1);
+        map.addLayer(layer_RencanaPolaRuang_1);
+        function pop_LahanEksisting_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMOBJ</strong><br />' + (feature.properties['NAMOBJ'] !== null ? autolinker.link(feature.properties['NAMOBJ'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMZON</strong><br />' + (feature.properties['NAMZON'] !== null ? autolinker.link(feature.properties['NAMZON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KODZON</strong><br />' + (feature.properties['KODZON'] !== null ? autolinker.link(feature.properties['KODZON'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>NAMSZN</strong><br />' + (feature.properties['NAMSZN'] !== null ? autolinker.link(feature.properties['NAMSZN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KODSZN</strong><br />' + (feature.properties['KODSZN'] !== null ? autolinker.link(feature.properties['KODSZN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>JNSPR</strong><br />' + (feature.properties['JNSPR'] !== null ? autolinker.link(feature.properties['JNSPR'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>WP</strong><br />' + (feature.properties['WP'] !== null ? autolinker.link(feature.properties['WP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Luas</strong><br />' + (feature.properties['Luas'] !== null ? autolinker.link(feature.properties['Luas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Desa</strong><br />' + (feature.properties['Desa'] !== null ? autolinker.link(feature.properties['Desa'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_LahanEksisting_2_0(feature) {
+            switch(String(feature.properties['NAMOBJ'])) {
+                case 'Badan Air':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(151,219,242,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Badan Jalan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(235,30,30,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Campuran Intensitas Tinggi':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,85,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Kawasan Ekosistem Mangrove':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(45,150,110,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perdagangan dan Jasa Skala SWP':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,165,165,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pergudangan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,55,55,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perlindungan Setempat':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(5,215,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pertahanan dan Keamanan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,0,255,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perumahan Kepadatan Sangat Rendah':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,155,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perumahan Kepadatan Tinggi':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,220,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rimba Kota':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(55,85,10,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SPU Skala Kelurahan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(185,75,185,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SPU Skala Kota':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,25,125,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'SPU Skala RW':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,100,215,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taman Kelurahan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(75,165,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Taman Kota':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(65,105,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Tanaman Pangan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(200,245,70,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perdagangan dan Jasa Skala WP':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,130,130,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkantoran':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(155,155,155,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Perkebunan':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(175,175,55,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Transportasi':
+                    return {
+                pane: 'pane_LahanEksisting_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,55,0,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_LahanEksisting_2');
+        map.getPane('pane_LahanEksisting_2').style.zIndex = 402;
+        map.getPane('pane_LahanEksisting_2').style['mix-blend-mode'] = 'normal';
+        var layer_LahanEksisting_2 = new L.geoJson(json_LahanEksisting_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_LahanEksisting_2',
+            layerName: 'layer_LahanEksisting_2',
+            pane: 'pane_LahanEksisting_2',
+            onEachFeature: pop_LahanEksisting_2,
+            style: style_LahanEksisting_2_0,
+        });
+        bounds_group.addLayer(layer_LahanEksisting_2);
+        map.addLayer(layer_LahanEksisting_2);
+        function pop_RencanaJaringanJalanKawasanSepaku_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Status</strong><br />' + (feature.properties['Status'] !== null ? autolinker.link(feature.properties['Status'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Hirarki</strong><br />' + (feature.properties['Hirarki'] !== null ? autolinker.link(feature.properties['Hirarki'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RencanaJaringanJalanKawasanSepaku_3_0(feature) {
+            switch(String(feature.properties['Keterangan'])) {
+                case 'Eksisting':
+                    return {
+                pane: 'pane_RencanaJaringanJalanKawasanSepaku_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rencana':
+                    return {
+                pane: 'pane_RencanaJaringanJalanKawasanSepaku_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(22,22,210,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RencanaJaringanJalanKawasanSepaku_3');
+        map.getPane('pane_RencanaJaringanJalanKawasanSepaku_3').style.zIndex = 403;
+        map.getPane('pane_RencanaJaringanJalanKawasanSepaku_3').style['mix-blend-mode'] = 'normal';
+        var layer_RencanaJaringanJalanKawasanSepaku_3 = new L.geoJson(json_RencanaJaringanJalanKawasanSepaku_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RencanaJaringanJalanKawasanSepaku_3',
+            layerName: 'layer_RencanaJaringanJalanKawasanSepaku_3',
+            pane: 'pane_RencanaJaringanJalanKawasanSepaku_3',
+            onEachFeature: pop_RencanaJaringanJalanKawasanSepaku_3,
+            style: style_RencanaJaringanJalanKawasanSepaku_3_0,
+        });
+        bounds_group.addLayer(layer_RencanaJaringanJalanKawasanSepaku_3);
+        map.addLayer(layer_RencanaJaringanJalanKawasanSepaku_3);
+        function pop_JaringanJalanIbukotaNusantara_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['access_con'] !== null ? autolinker.link(feature.properties['access_con'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_JaringanJalanIbukotaNusantara_4_0(feature) {
+            switch(String(feature.properties['access_con'])) {
+                case 'Jalan Kolektor Primer':
+                    return {
+                pane: 'pane_JaringanJalanIbukotaNusantara_4',
+                opacity: 1,
+                color: 'rgba(255,127,0,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Jalan Lainnya':
+                    return {
+                pane: 'pane_JaringanJalanIbukotaNusantara_4',
+                opacity: 1,
+                color: 'rgba(117,117,117,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+                case 'Jalan Tol':
+                    return {
+                pane: 'pane_JaringanJalanIbukotaNusantara_4',
+                opacity: 1,
+                color: 'rgba(192,38,193,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_JaringanJalanIbukotaNusantara_4');
+        map.getPane('pane_JaringanJalanIbukotaNusantara_4').style.zIndex = 404;
+        map.getPane('pane_JaringanJalanIbukotaNusantara_4').style['mix-blend-mode'] = 'normal';
+        var layer_JaringanJalanIbukotaNusantara_4 = new L.geoJson(json_JaringanJalanIbukotaNusantara_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_JaringanJalanIbukotaNusantara_4',
+            layerName: 'layer_JaringanJalanIbukotaNusantara_4',
+            pane: 'pane_JaringanJalanIbukotaNusantara_4',
+            onEachFeature: pop_JaringanJalanIbukotaNusantara_4,
+            style: style_JaringanJalanIbukotaNusantara_4_0,
+        });
+        bounds_group.addLayer(layer_JaringanJalanIbukotaNusantara_4);
+        map.addLayer(layer_JaringanJalanIbukotaNusantara_4);
+        function pop_PersilBangunan_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? autolinker.link(feature.properties['name'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Subzona</strong><br />' + (feature.properties['Subzona'] !== null ? autolinker.link(feature.properties['Subzona'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Blok</strong><br />' + (feature.properties['Blok'] !== null ? autolinker.link(feature.properties['Blok'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PersilBangunan_5_0() {
+            return {
+                pane: 'pane_PersilBangunan_5',
+                opacity: 1,
+                color: 'rgba(35,35,35,0.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,12,12,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_PersilBangunan_5');
+        map.getPane('pane_PersilBangunan_5').style.zIndex = 405;
+        map.getPane('pane_PersilBangunan_5').style['mix-blend-mode'] = 'normal';
+        var layer_PersilBangunan_5 = new L.geoJson(json_PersilBangunan_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_PersilBangunan_5',
+            layerName: 'layer_PersilBangunan_5',
+            pane: 'pane_PersilBangunan_5',
+            onEachFeature: pop_PersilBangunan_5,
+            style: style_PersilBangunan_5_0,
+        });
+        bounds_group.addLayer(layer_PersilBangunan_5);
+        map.addLayer(layer_PersilBangunan_5);
+        function pop_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Id'] !== null ? autolinker.link(feature.properties['Id'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_0(feature) {
+            switch(String(feature.properties['Keterangan'])) {
+                case 'Halte':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,120,180,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pembangunan CCTV':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,127,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pembangunan High Speed Detector':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Pembangunan Traffic Light':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(248,248,73,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Transit Transisi Kendaraan Non Emisi':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(77,172,38,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6');
+        map.getPane('pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6').style.zIndex = 406;
+        map.getPane('pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6').style['mix-blend-mode'] = 'normal';
+        var layer_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6 = new L.geoJson(json_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+            layerName: 'layer_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+            pane: 'pane_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6',
+            onEachFeature: pop_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6);
+        map.addLayer(layer_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6);
+        function pop_RencanaPembangunanSaranaPrasaranaUmum_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Keterangan</strong><br />' + (feature.properties['Keterangan'] !== null ? autolinker.link(feature.properties['Keterangan'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RencanaPembangunanSaranaPrasaranaUmum_7_0(feature) {
+            switch(String(feature.properties['Keterangan'])) {
+                case 'Rencana Damkar':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaUmum_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,12,12,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rencana Kesehatan':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaUmum_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,85,167,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Rencana Pendidikan':
+                    return {
+                pane: 'pane_RencanaPembangunanSaranaPrasaranaUmum_7',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(186,0,158,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RencanaPembangunanSaranaPrasaranaUmum_7');
+        map.getPane('pane_RencanaPembangunanSaranaPrasaranaUmum_7').style.zIndex = 407;
+        map.getPane('pane_RencanaPembangunanSaranaPrasaranaUmum_7').style['mix-blend-mode'] = 'normal';
+        var layer_RencanaPembangunanSaranaPrasaranaUmum_7 = new L.geoJson(json_RencanaPembangunanSaranaPrasaranaUmum_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RencanaPembangunanSaranaPrasaranaUmum_7',
+            layerName: 'layer_RencanaPembangunanSaranaPrasaranaUmum_7',
+            pane: 'pane_RencanaPembangunanSaranaPrasaranaUmum_7',
+            onEachFeature: pop_RencanaPembangunanSaranaPrasaranaUmum_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_RencanaPembangunanSaranaPrasaranaUmum_7_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_RencanaPembangunanSaranaPrasaranaUmum_7);
+        map.addLayer(layer_RencanaPembangunanSaranaPrasaranaUmum_7);
+        function pop_RencanaHubTransport_8(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Rencana</strong><br />' + (feature.properties['Rencana'] !== null ? autolinker.link(feature.properties['Rencana'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_RencanaHubTransport_8_0(feature) {
+            switch(String(feature.properties['Rencana'])) {
+                case 'Hub Komersil':
+                    return {
+                pane: 'pane_RencanaHubTransport_8',
+                radius: 7.200000000000003,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(16,209,196,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hub Logistik':
+                    return {
+                pane: 'pane_RencanaHubTransport_8',
+                radius: 7.200000000000003,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,124,21,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hub Transit':
+                    return {
+                pane: 'pane_RencanaHubTransport_8',
+                radius: 7.200000000000003,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(61,160,88,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Hub Transportasi Laut':
+                    return {
+                pane: 'pane_RencanaHubTransport_8',
+                radius: 7.200000000000003,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(87,184,134,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_RencanaHubTransport_8');
+        map.getPane('pane_RencanaHubTransport_8').style.zIndex = 408;
+        map.getPane('pane_RencanaHubTransport_8').style['mix-blend-mode'] = 'normal';
+        var layer_RencanaHubTransport_8 = new L.geoJson(json_RencanaHubTransport_8, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_RencanaHubTransport_8',
+            layerName: 'layer_RencanaHubTransport_8',
+            pane: 'pane_RencanaHubTransport_8',
+            onEachFeature: pop_RencanaHubTransport_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.shapeMarker(latlng, style_RencanaHubTransport_8_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_RencanaHubTransport_8);
+        map.addLayer(layer_RencanaHubTransport_8);
+        function pop_DelineasiKawasanSepaku_9(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>Luas</strong><br />' + (feature.properties['Luas'] !== null ? autolinker.link(feature.properties['Luas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Delineasi</strong><br />' + (feature.properties['Delineasi'] !== null ? autolinker.link(feature.properties['Delineasi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DelineasiKawasanSepaku_9_0() {
+            return {
+                pane: 'pane_DelineasiKawasanSepaku_9',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        function style_DelineasiKawasanSepaku_9_1() {
+            return {
+                pane: 'pane_DelineasiKawasanSepaku_9',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '10,5,1,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_DelineasiKawasanSepaku_9');
+        map.getPane('pane_DelineasiKawasanSepaku_9').style.zIndex = 409;
+        map.getPane('pane_DelineasiKawasanSepaku_9').style['mix-blend-mode'] = 'normal';
+        var layer_DelineasiKawasanSepaku_9 = new L.geoJson.multiStyle(json_DelineasiKawasanSepaku_9, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DelineasiKawasanSepaku_9',
+            layerName: 'layer_DelineasiKawasanSepaku_9',
+            pane: 'pane_DelineasiKawasanSepaku_9',
+            onEachFeature: pop_DelineasiKawasanSepaku_9,
+            styles: [style_DelineasiKawasanSepaku_9_0,style_DelineasiKawasanSepaku_9_1,]
+        });
+        bounds_group.addLayer(layer_DelineasiKawasanSepaku_9);
+        map.addLayer(layer_DelineasiKawasanSepaku_9);
+        function pop_DeliniasiIbukotaNusantara_10(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>luas</strong><br />' + (feature.properties['luas'] !== null ? autolinker.link(feature.properties['luas'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KET</strong><br />' + (feature.properties['KET'] !== null ? autolinker.link(feature.properties['KET'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DeliniasiIbukotaNusantara_10_0() {
+            return {
+                pane: 'pane_DeliniasiIbukotaNusantara_10',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.0)',
+                interactive: true,
+            }
+        }
+        function style_DeliniasiIbukotaNusantara_10_1() {
+            return {
+                pane: 'pane_DeliniasiIbukotaNusantara_10',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '10,5,1,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_DeliniasiIbukotaNusantara_10');
+        map.getPane('pane_DeliniasiIbukotaNusantara_10').style.zIndex = 410;
+        map.getPane('pane_DeliniasiIbukotaNusantara_10').style['mix-blend-mode'] = 'normal';
+        var layer_DeliniasiIbukotaNusantara_10 = new L.geoJson.multiStyle(json_DeliniasiIbukotaNusantara_10, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DeliniasiIbukotaNusantara_10',
+            layerName: 'layer_DeliniasiIbukotaNusantara_10',
+            pane: 'pane_DeliniasiIbukotaNusantara_10',
+            onEachFeature: pop_DeliniasiIbukotaNusantara_10,
+            styles: [style_DeliniasiIbukotaNusantara_10_0,style_DeliniasiIbukotaNusantara_10_1,]
+        });
+        bounds_group.addLayer(layer_DeliniasiIbukotaNusantara_10);
+        map.addLayer(layer_DeliniasiIbukotaNusantara_10);
+        function pop_BatasAdministrasiBagianWilayahPerencanaan_11(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2"><strong>BWP</strong><br />' + (feature.properties['BWP'] !== null ? autolinker.link(feature.properties['BWP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>ROMAWI</strong><br />' + (feature.properties['ROMAWI'] !== null ? autolinker.link(feature.properties['ROMAWI'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KETERANGAN</strong><br />' + (feature.properties['KETERANGAN'] !== null ? autolinker.link(feature.properties['KETERANGAN'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>KETERANG_1</strong><br />' + (feature.properties['KETERANG_1'] !== null ? autolinker.link(feature.properties['KETERANG_1'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>LUAS_HA</strong><br />' + (feature.properties['LUAS_HA'] !== null ? autolinker.link(feature.properties['LUAS_HA'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_BatasAdministrasiBagianWilayahPerencanaan_11_0() {
+            return {
+                pane: 'pane_BatasAdministrasiBagianWilayahPerencanaan_11',
+                opacity: 1,
+                color: 'rgba(255,219,27,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.0)',
+                interactive: true,
+            }
+        }
+        function style_BatasAdministrasiBagianWilayahPerencanaan_11_1() {
+            return {
+                pane: 'pane_BatasAdministrasiBagianWilayahPerencanaan_11',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '10,5,1,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(247,252,245,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_BatasAdministrasiBagianWilayahPerencanaan_11');
+        map.getPane('pane_BatasAdministrasiBagianWilayahPerencanaan_11').style.zIndex = 411;
+        map.getPane('pane_BatasAdministrasiBagianWilayahPerencanaan_11').style['mix-blend-mode'] = 'normal';
+        var layer_BatasAdministrasiBagianWilayahPerencanaan_11 = new L.geoJson.multiStyle(json_BatasAdministrasiBagianWilayahPerencanaan_11, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_BatasAdministrasiBagianWilayahPerencanaan_11',
+            layerName: 'layer_BatasAdministrasiBagianWilayahPerencanaan_11',
+            pane: 'pane_BatasAdministrasiBagianWilayahPerencanaan_11',
+            onEachFeature: pop_BatasAdministrasiBagianWilayahPerencanaan_11,
+            styles: [style_BatasAdministrasiBagianWilayahPerencanaan_11_0,style_BatasAdministrasiBagianWilayahPerencanaan_11_1,]
+        });
+        bounds_group.addLayer(layer_BatasAdministrasiBagianWilayahPerencanaan_11);
+        map.addLayer(layer_BatasAdministrasiBagianWilayahPerencanaan_11);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/BatasAdministrasiBagianWilayahPerencanaan_11.png" /> Batas Administrasi Bagian Wilayah Perencanaan': layer_BatasAdministrasiBagianWilayahPerencanaan_11,'<img src="legend/DeliniasiIbukotaNusantara_10.png" /> Deliniasi Ibukota Nusantara': layer_DeliniasiIbukotaNusantara_10,'<img src="legend/DelineasiKawasanSepaku_9.png" /> Delineasi Kawasan Sepaku': layer_DelineasiKawasanSepaku_9,'Rencana Hub Transport<br /><table><tr><td style="text-align: center;"><img src="legend/RencanaHubTransport_8_HubKomersil0.png" /></td><td>Hub Komersil</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaHubTransport_8_HubLogistik1.png" /></td><td>Hub Logistik</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaHubTransport_8_HubTransit2.png" /></td><td>Hub Transit</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaHubTransport_8_HubTransportasiLaut3.png" /></td><td>Hub Transportasi Laut</td></tr></table>': layer_RencanaHubTransport_8,'Rencana Pembangunan Sarana & Prasarana Umum<br /><table><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaUmum_7_RencanaDamkar0.png" /></td><td>Rencana Damkar</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaUmum_7_RencanaKesehatan1.png" /></td><td>Rencana Kesehatan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaUmum_7_RencanaPendidikan2.png" /></td><td>Rencana Pendidikan</td></tr></table>': layer_RencanaPembangunanSaranaPrasaranaUmum_7,'Rencana Pembangunan Sarana & Prasarana Layanan Transportasi<br /><table><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_Halte0.png" /></td><td>Halte</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_PembangunanCCTV1.png" /></td><td>Pembangunan CCTV</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_PembangunanHighSpeedDetector2.png" /></td><td>Pembangunan High Speed Detector</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_PembangunanTrafficLight3.png" /></td><td>Pembangunan Traffic Light</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPembangunanSaranaPrasaranaLayananTransportasi_6_TransitTransisiKendaraanNonEmisi4.png" /></td><td>Transit Transisi Kendaraan Non Emisi</td></tr></table>': layer_RencanaPembangunanSaranaPrasaranaLayananTransportasi_6,'<img src="legend/PersilBangunan_5.png" /> Persil Bangunan': layer_PersilBangunan_5,'Jaringan Jalan Ibukota Nusantara<br /><table><tr><td style="text-align: center;"><img src="legend/JaringanJalanIbukotaNusantara_4_JalanKolektorPrimer0.png" /></td><td>Jalan Kolektor Primer</td></tr><tr><td style="text-align: center;"><img src="legend/JaringanJalanIbukotaNusantara_4_JalanLainnya1.png" /></td><td>Jalan Lainnya</td></tr><tr><td style="text-align: center;"><img src="legend/JaringanJalanIbukotaNusantara_4_JalanTol2.png" /></td><td>Jalan Tol</td></tr></table>': layer_JaringanJalanIbukotaNusantara_4,'Rencana Jaringan Jalan Kawasan Sepaku<br /><table><tr><td style="text-align: center;"><img src="legend/RencanaJaringanJalanKawasanSepaku_3_Eksisting0.png" /></td><td>Eksisting</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaJaringanJalanKawasanSepaku_3_Rencana1.png" /></td><td>Rencana</td></tr></table>': layer_RencanaJaringanJalanKawasanSepaku_3,'Lahan Eksisting<br /><table><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_BadanAir0.png" /></td><td>Badan Air</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_BadanJalan1.png" /></td><td>Badan Jalan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_CampuranIntensitasTinggi2.png" /></td><td>Campuran Intensitas Tinggi</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_KawasanEkosistemMangrove3.png" /></td><td>Kawasan Ekosistem Mangrove</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_PerdagangandanJasaSkalaSWP4.png" /></td><td>Perdagangan dan Jasa Skala SWP</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_Pergudangan5.png" /></td><td>Pergudangan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_PerlindunganSetempat6.png" /></td><td>Perlindungan Setempat</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_PertahanandanKeamanan7.png" /></td><td>Pertahanan dan Keamanan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_PerumahanKepadatanSangatRendah8.png" /></td><td>Perumahan Kepadatan Sangat Rendah</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_PerumahanKepadatanTinggi9.png" /></td><td>Perumahan Kepadatan Tinggi</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_RimbaKota10.png" /></td><td>Rimba Kota</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_SPUSkalaKelurahan11.png" /></td><td>SPU Skala Kelurahan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_SPUSkalaKota12.png" /></td><td>SPU Skala Kota</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_SPUSkalaRW13.png" /></td><td>SPU Skala RW</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_TamanKelurahan14.png" /></td><td>Taman Kelurahan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_TamanKota15.png" /></td><td>Taman Kota</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_TanamanPangan16.png" /></td><td>Tanaman Pangan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_PerdagangandanJasaSkalaWP17.png" /></td><td>Perdagangan dan Jasa Skala WP</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_Perkantoran18.png" /></td><td>Perkantoran</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_Perkebunan19.png" /></td><td>Perkebunan</td></tr><tr><td style="text-align: center;"><img src="legend/LahanEksisting_2_Transportasi20.png" /></td><td>Transportasi</td></tr></table>': layer_LahanEksisting_2,'Rencana Pola Ruang<br /><table><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_BadanAir0.png" /></td><td>Badan Air</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_BadanJalan1.png" /></td><td>Badan Jalan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_CampuranIntensitasTinggi2.png" /></td><td>Campuran Intensitas Tinggi</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_KawasanEkosistemMangrove3.png" /></td><td>Kawasan Ekosistem Mangrove</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_PerdagangandanJasaSkalaSWP4.png" /></td><td>Perdagangan dan Jasa Skala SWP</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_Pergudangan5.png" /></td><td>Pergudangan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_PerlindunganSetempat6.png" /></td><td>Perlindungan Setempat</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_PertahanandanKeamanan7.png" /></td><td>Pertahanan dan Keamanan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_PerumahanKepadatanSangatRendah8.png" /></td><td>Perumahan Kepadatan Sangat Rendah</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_PerumahanKepadatanTinggi9.png" /></td><td>Perumahan Kepadatan Tinggi</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_RimbaKota10.png" /></td><td>Rimba Kota</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_SPUSkalaKelurahan11.png" /></td><td>SPU Skala Kelurahan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_SPUSkalaKota12.png" /></td><td>SPU Skala Kota</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_SPUSkalaRW13.png" /></td><td>SPU Skala RW</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_TamanKelurahan14.png" /></td><td>Taman Kelurahan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_TamanKota15.png" /></td><td>Taman Kota</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_TanamanPangan16.png" /></td><td>Tanaman Pangan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_PerdagangandanJasaSkalaWP17.png" /></td><td>Perdagangan dan Jasa Skala WP</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_Perkantoran18.png" /></td><td>Perkantoran</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_Perkebunan19.png" /></td><td>Perkebunan</td></tr><tr><td style="text-align: center;"><img src="legend/RencanaPolaRuang_1_Transportasi20.png" /></td><td>Transportasi</td></tr></table>': layer_RencanaPolaRuang_1,"Google Imagery": layer_GoogleImagery_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        resetLabels([layer_RencanaPolaRuang_1,layer_LahanEksisting_2,layer_DeliniasiIbukotaNusantara_10,layer_BatasAdministrasiBagianWilayahPerencanaan_11]);
+        map.on("zoomend", function(){
+            resetLabels([layer_RencanaPolaRuang_1,layer_LahanEksisting_2,layer_DeliniasiIbukotaNusantara_10,layer_BatasAdministrasiBagianWilayahPerencanaan_11]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_RencanaPolaRuang_1,layer_LahanEksisting_2,layer_DeliniasiIbukotaNusantara_10,layer_BatasAdministrasiBagianWilayahPerencanaan_11]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_RencanaPolaRuang_1,layer_LahanEksisting_2,layer_DeliniasiIbukotaNusantara_10,layer_BatasAdministrasiBagianWilayahPerencanaan_11]);
+        });
+        </script>
+    </body>
+</html>
